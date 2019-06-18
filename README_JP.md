@@ -7,7 +7,7 @@ $ pip install jeraconv
 ```
 ## Usage
 ```python
-import jeraconv
+from jeraconv import jeracon
 
 # J2W クラスのインスタンス生成
 jc = jeraconv.J2W()
