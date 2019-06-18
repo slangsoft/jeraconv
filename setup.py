@@ -1,4 +1,11 @@
+from os import path
+
 from setuptools import setup
+
+here = path.abspath(path.dirname(__file__))
+
+with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
     name='jeraconv',
@@ -10,6 +17,8 @@ setup(
     author='slangsoft',
     author_email='slangsoft@gmail.com',
     description='jeraconv (Japanese Era Name Converter) is a converter that converts Japanese eras to West calendar.',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     keywords='jeraconv japanese era',
     classifiers=[
         'License :: OSI Approved :: MIT License',
