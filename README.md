@@ -3,7 +3,7 @@ jeraconv (Japanese Era Name Converter) is a converter that converts Japanese era
 
 ## Installation
 ```text
-$ pip install jeracong
+$ pip install jeraconv
 ```
 ## Usage
 ```python

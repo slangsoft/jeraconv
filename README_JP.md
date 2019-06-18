@@ -3,7 +3,7 @@ jeraconv (Japanese Era Name Converter) は、和暦を西暦に変換するた�
 
 ## Installation
 ```text
-$ pip install jeracong
+$ pip install jeraconv
 ```
 ## Usage
 ```python
