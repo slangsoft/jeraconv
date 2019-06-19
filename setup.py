@@ -9,7 +9,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='jeraconv',
-    version='0.2.0',
+    version='0.2.1',
     packages=['tests', 'jeraconv'],
     package_data={'jeraconv': ['data/*.json']},
     url='https://github.com/slangsoft/jeraconv',
@@ -22,7 +22,7 @@ setup(
     keywords='jeraconv japanese era',
     classifiers=[
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ],
     test_suite='tests',
 )
