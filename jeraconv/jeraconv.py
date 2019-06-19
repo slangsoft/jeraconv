@@ -5,6 +5,12 @@ import re
 PATH_BASE = os.path.dirname(__file__)
 DIR_DATA = 'data'
 FILE_JSON = 'jeraconv.json'
+DIC_KEY_START = 'start'
+DIC_KEY_END = 'end'
+DIC_KEY_MAX = 'max'
+DIC_KEY_YEAR = 'year'
+DIC_KEY_MONTH = 'month'
+DIC_KEY_DAY = 'day'
 
 
 class J2W(object):
@@ -13,15 +19,16 @@ class J2W(object):
         with open(PATH_BASE + '/' + DIR_DATA + '/' + FILE_JSON) as f:
             self.__data_dic = json.load(f)
 
-    def convert(self, str_arg, ):
+    def convert(self, str_arg, limit_check=True):
         """
         Return the year corresponding to Japanese year notation.
 
-        .. versionadded:: 0.0.1
+        .. versionadded:: 0.2.0
 
         Parameters
         ----------
         str_arg : str
+        limit_check : bool default=True
 
         Returns
         -------
@@ -51,13 +58,14 @@ class J2W(object):
                              'The era name given for the argument does not exist.')
 
         str_received_year = self.__extract_year(str_arg)
-        if self.__is_correct_year(str_received_era, str_received_year):
+        if self.__is_correct_year(str_received_era, str_received_year, limit_check):
             pass
         else:
             raise ValueError('J2W.convert method threw an exception. '
                              'The year given for the argument does not exist.')
 
-        int_return_year = int(self.__data_dic[str_received_era]['start'][:4]) + int(str_received_year) - 1
+        int_return_year = int(self.__data_dic[str_received_era][DIC_KEY_START][DIC_KEY_YEAR]) \
+                          + int(str_received_year) - 1
         return int_return_year
 
     def __pre_process(self, str_arg):
@@ -79,11 +87,15 @@ class J2W(object):
             res = True
         return res
 
-    def __is_correct_year(self, str_era, str_year):
+    def __is_correct_year(self, str_era, str_year, limit_check):
         res = False
         int_year = int(str_year)
-        if (int_year > 0) and (int_year <= int(self.__data_dic[str_era]["max"])):
-            res = True
+        if limit_check:
+            if (int_year > 0) and (int_year <= int(self.__data_dic[str_era][DIC_KEY_MAX])):
+                res = True
+        else:
+            if int_year > 0:
+                res = True
         return res
 
     def __extract_era(self, str_arg):
