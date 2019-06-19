@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 import re
@@ -112,3 +113,43 @@ class J2W(object):
         if len(num) < 2:
             str_arg = str_arg.replace(num[0], '0' + num[0])
         return str_arg
+
+
+class W2J(object):
+
+    def __init__(self):
+        with open(PATH_BASE + '/' + DIR_DATA + '/' + FILE_JSON) as f:
+            self.__data_dic = json.load(f)
+
+    def convert(self,
+                int_year=datetime.date.today().year,
+                int_month=datetime.date.today().month,
+                int_day=datetime.date.today().day,
+                return_type='str'):
+
+        for key, val in self.__data_dic.items():
+            arg_date = datetime.date(int_year,
+                                     int_month,
+                                     int_day)
+            start_date = datetime.date(val[DIC_KEY_START][DIC_KEY_YEAR],
+                                       val[DIC_KEY_START][DIC_KEY_MONTH],
+                                       val[DIC_KEY_START][DIC_KEY_DAY])
+            end_date = datetime.date(val[DIC_KEY_END][DIC_KEY_YEAR],
+                                     val[DIC_KEY_END][DIC_KEY_MONTH],
+                                     val[DIC_KEY_END][DIC_KEY_DAY])
+            if start_date <= arg_date <= end_date:
+                break
+
+        res_year = int_year - val[DIC_KEY_START][DIC_KEY_YEAR] + 1
+        if return_type == 'dict':
+            res = {'era': key, 'year': res_year, 'month': int_month, 'day': int_day}
+        elif return_type == 'list':
+            res = [key, res_year, int_month, int_day]
+        elif return_type == 'tuple':
+            res = (key, res_year, int_month, int_day)
+        elif return_type == 'str':
+            res = key + str(res_year) + '年' + str(int_month) + '月' + str(int_day) + '日'
+        else:
+            raise ValueError('W2J.convert method threw an exception. '
+                             'The return_type given for the argument does not exist.')
+        return res
