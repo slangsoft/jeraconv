@@ -17,7 +17,7 @@ DIC_KEY_DAY = 'day'
 class J2W(object):
 
     def __init__(self):
-        with open(PATH_BASE + '/' + DIR_DATA + '/' + FILE_JSON) as f:
+        with open(PATH_BASE + '/' + DIR_DATA + '/' + FILE_JSON, encoding='utf-8_sig') as f:
             self.__data_dic = json.load(f)
 
     def convert(self, str_arg, limit_check=True):
@@ -118,7 +118,7 @@ class J2W(object):
 class W2J(object):
 
     def __init__(self):
-        with open(PATH_BASE + '/' + DIR_DATA + '/' + FILE_JSON) as f:
+        with open(PATH_BASE + '/' + DIR_DATA + '/' + FILE_JSON, encoding='utf-8_sig') as f:
             self.__data_dic = json.load(f)
 
     def convert(self,
