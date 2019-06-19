@@ -126,7 +126,27 @@ class W2J(object):
                 int_month=datetime.date.today().month,
                 int_day=datetime.date.today().day,
                 return_type='str'):
+        """
+        Return the year corresponding to Japanese year notation.
 
+        .. versionadded:: 0.1.0
+
+        Parameters
+        ----------
+        int_year : int default=datetime.date.today().year
+        int_month : int default=datetime.date.today().month
+        int_day : int default=datetime.date.today().day
+        return_type : str default='str'
+
+        Returns
+        -------
+        West calendar (str or dict or list or tuple)
+
+        Raises
+        ------
+        ValueError
+            * If ``return_type`` is set to a non-existent.
+        """
         for key, val in self.__data_dic.items():
             arg_date = datetime.date(int_year,
                                      int_month,
