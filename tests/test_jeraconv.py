@@ -43,6 +43,8 @@ class TestJeraconv(unittest.TestCase):
         self.assertEqual(2117, self.jc.convert('令和99年'))
         self.assertEqual(2117, self.jc.convert('令和９９年'))
 
+        self.assertEqual(2020, self.jc.convert('平成32年', limit_check=False))
+
     def test_jeraconv_errors(self):
         self.assertRaises(ValueError, self.jc.convert, '大化0年')
         self.assertRaises(ValueError, self.jc.convert, '大化00年')
@@ -58,6 +60,8 @@ class TestJeraconv(unittest.TestCase):
         self.assertRaises(ValueError, self.jc.convert, '牌孫01年')
         self.assertRaises(ValueError, self.jc.convert, '牌孫１年')
         self.assertRaises(ValueError, self.jc.convert, '牌孫０１年')
+
+        self.assertRaises(ValueError, self.jc.convert, '平成32年', limit_check=True)
 
 
 if __name__ == '__main__':
